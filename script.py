@@ -1,13 +1,13 @@
 def greet():
     print("-------------------")
-    print("  Приветсвуем вас  ")
-    print("      в игре       ")
+    print("  Вас приветствует ")
+    print("        игра       ")
     print("  крестики-нолики  ")
     print("-------------------")
-    print(" формат ввода: x y ")
+    print(" форма ввода: x y  ")
     print(" x - номер строки  ")
     print(" y - номер столбца ")
-
+    print("   удачной игры    ")
 
 def show():
     print()
@@ -37,7 +37,7 @@ def ask():
         x, y = int(x), int(y)
 
         if 0 > x or x > 2 or 0 > y or y > 2:
-            print(" Координаты вне диапазона! ")
+            print(" Координаты не соответствуют условию ")
             continue
 
         if field[x][y] != " ":
@@ -56,10 +56,10 @@ def check_win():
         for c in cord:
             symbols.append(field[c[0]][c[1]])
         if symbols == ["X", "X", "X"]:
-            print("Выиграл X!!!")
+            print("Выиграл игрок X!!!")
             return True
         if symbols == ["0", "0", "0"]:
-            print("Выиграл 0!!!")
+            print("Выиграл игрок 0!!!")
             return True
     return False
 
