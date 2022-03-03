@@ -1,0 +1,63 @@
+Команды консоли Django:
+u1 = User.objects.create_user(username='Subzero')
+u2 = User.objects.create_user(username='Scorpion')
+Author.objects.create(authorUser=u1)
+Author.objects.create(authorUser=u2)
+Category.objects.create(name=’Weather’)
+Category.objects.create(name=’The science’)
+Category.objects.create(name=’Sport’)
+Category.objects.create(name=’The medicine’)
+author = Author.objects.get(id=1)
+
+Post.objects.create(author=author, categoryType='AR', title='Зима позади', text='Шкала термометра с каждвм днем двигается к плюсовой температуре')
+
+Post.objects.create(author=author, categoryType='AR', title='Врач объяснила, почему зимой чаще идет кровь из носа', text='Зимой происходит истончение слизистой оболочки носа. Дело в том, что системы отопления в домах и в машинах высушивают воздух, а на улицах мороз повреждает слизистую оболочку носа. В результате такого воздействия она становится более ранимой, и носовые кровотечения происходят чаще')
+
+Post.objects.create(author=author, categoryType='NW', title='В Тюменской области высадят 16 миллионов саженцев хвойных пород деревьев', text='В Тюменской областив рамках реализации проекта "Сохранение лесов" в 2021 году планируется провести лесовосстановление и лесоразведение на площади 7,8 тысяч гектаров, в том числе создать искусственные насаждения на площади 3,9 тысяч гектаров, сообщает пресс-служба областного правительства. Для проведения этих работ потребуются свыше 16 миллионов сеянцев хвойных пород, которые выращены в лесных питомниках области. Подготовкой посадочного материала сейчас заняты лесники')
+
+author1 = Author.objects.get(id=2)
+
+Post.objects.create(author=author1, categoryType='AR', title='Сила земли стала источником тепла для школы в Ленобласти', text='Раньше школа в поселке отапливалась масляными радиаторами. Счета за электроэнергию по итогам сезона получались весьма внушительными, а иногда даже критичными для учреждения. Но выход нашелся: осенью на заднем дворе пробурили 14 скважин глубиной 145 метров, в небольшом техническом помещении установили теплоузел. Получаемое тепло позволяет обогревать свыше тысячи квадратных метров здания. Все работы заняли не более двух месяцев')
+Post.objects.get(id=3).postCategory.add(Category.objects.get(id=1))
+Post.objects.get(id=3).postCategory.add(Category.objects.get(id=2))
+Comment.objects.create(commentPost=Post.objects.get(id=1), commentUser=author.authorUser, text='Отличная новость')
+Comment.objects.create(commentPost=Post.objects.get(id=2), commentUser=author1.authorUser, text='Познавательно')
+Comment.objects.create(commentPost=Post.objects.get(id=3), commentUser=author1.authorUser, text='Озеленение это круто')
+Comment.objects.create(commentPost=Post.objects.get(id=4), commentUser=author.authorUser, text='Наверно местный инженер постарался')
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=1).rating
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=1).dislike()
+Comment.objects.get(id=2).dislike()
+Comment.objects.get(id=3).like()
+Comment.objects.get(id=3).dislike()
+Comment.objects.get(id=4).dislike()
+Comment.objects.get(id=4).like()
+a = author
+b = author1
+a.update_rating()
+b.update_rating()
+a = Author.objects.order_by('-ratingAuthor')
+for i in a:
+	i.ratingAuthor
+	i.authorUser.username
+a = Post.objects.filter(categoryType='AR').order_by('-rating')[:1]
+for i in a:
+	i.dateCreation.strftime("%Y-%m-%d")
+	i.author.authorUser.username
+	i.rating
+	i.title
+	i.preview()
+	best_ar_id = i.id
+c = Comment.objects.filter(commentPost=best_ar_id)
+for i in c:
+	i.dateCreation.strftime("%Y-%m-%d")
+	i.commentUser.username
+	i.rating
+	i.text
